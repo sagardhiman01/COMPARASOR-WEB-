@@ -531,9 +531,190 @@
       align-items: center;
       justify-content: space-between;
     }
-  </style>
+
+    /* Image Upload Component Styles */
+    .image-upload-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .image-upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 14px;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .image-upload-box:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .image-upload-preview {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      flex-shrink: 0;
+    }
+
+    .image-upload-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .image-upload-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .image-upload-hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .image-url-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      align-self: flex-start;
+    }
+
+    /* Login Screen Overlay */
+    #adminLoginOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at top right, #1e293b, #0f172a 80%);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .login-header {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      padding: 32px 28px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-brand-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+    }
+
+    .login-body {
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-alert {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .login-alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      display: flex;
+    }
+
 </head>
 <body>
+
+  <!-- ================= ADMIN LOGIN AUTH OVERLAY ================= -->
+  <div id="adminLoginOverlay">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-brand-icon">
+          <i data-lucide="shield-check" style="width: 28px; height: 28px; color: #fff;"></i>
+        </div>
+        <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 4px; font-family: var(--font-heading);">Admin Portal Login</h2>
+        <p style="font-size: 12.5px; opacity: 0.85;">National Engineering Company Roorkee</p>
+      </div>
+
+      <div class="login-body">
+        <div id="loginAlertBox" class="login-alert">
+          <i data-lucide="alert-circle" style="width: 16px; height: 16px;"></i>
+          <span id="loginAlertMsg">Galat username ya password!</span>
+        </div>
+
+        <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" style="font-size: 13px;">Username</label>
+            <div style="position: relative;">
+              <input type="text" id="adminUsername" class="form-input" placeholder="admin" required autofocus autocomplete="username" style="padding-left: 38px;">
+              <i data-lucide="user" style="position: absolute; left: 12px; top: 12px; width: 16px; height: 16px; color: #94a3b8;"></i>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" style="font-size: 13px;">Password</label>
+            <div style="position: relative;">
+              <input type="password" id="adminPassword" class="form-input" placeholder="••••••••" required autocomplete="current-password" style="padding-left: 38px;">
+              <i data-lucide="lock" style="position: absolute; left: 12px; top: 12px; width: 16px; height: 16px; color: #94a3b8;"></i>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px; font-weight: 700;">
+            <i data-lucide="log-in" style="width: 16px; height: 16px;"></i>
+            <span>Login to Admin Panel</span>
+          </button>
+        </form>
+
+        <div style="font-size: 11.5px; text-align: center; color: #94a3b8; margin-top: 8px;">
+          Default Access: <strong>admin</strong> / <strong>admin123</strong>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Sidebar Navigation -->
   <aside class="admin-sidebar">
@@ -594,6 +775,10 @@
         <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
         <span>View Live Website</span>
       </a>
+      <button onclick="handleAdminLogout()" class="view-site-link" style="border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; background: rgba(239, 68, 68, 0.1); cursor: pointer;">
+        <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        <span>Logout Admin</span>
+      </button>
     </div>
   </aside>
 
@@ -614,6 +799,10 @@
         <button class="btn btn-primary" id="btnSaveAllChanges">
           <i data-lucide="save" style="width: 16px; height: 16px;"></i>
           <span>Save Changes (Live)</span>
+        </button>
+        <button class="btn btn-outline" onclick="handleAdminLogout()" title="Logout" style="color: #ef4444; border-color: #fee2e2;">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          <span>Logout</span>
         </button>
       </div>
     </header>
@@ -732,11 +921,25 @@
               <label class="form-label">Sub-description Paragraph</label>
               <textarea class="form-textarea" id="hero_description" style="min-height: 120px;"></textarea>
             </div>
-            <div class="form-group">
-              <label class="form-label">Hero Image Path / URL</label>
-              <input type="text" class="form-input" id="hero_image" placeholder="images/products-lineup-wide.jpg">
+            <div class="form-group full-width">
+              <label class="form-label">Hero Banner Photo</label>
+              <div class="image-upload-wrapper">
+                <input type="file" id="hero_image_file" accept="image/*" style="display: none;" onchange="handleFileUpload(this, 'hero_image', 'hero_image_preview')">
+                <div class="image-upload-box" onclick="document.getElementById('hero_image_file').click()">
+                  <img id="hero_image_preview" src="images/products-lineup-wide.jpg" class="image-upload-preview" alt="Preview">
+                  <div class="image-upload-meta">
+                    <div class="image-upload-title">
+                      <i data-lucide="upload-cloud" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                      <span>Upload Banner Photo</span>
+                    </div>
+                    <div class="image-upload-hint">Apne computer / mobile se direct photo select karein (JPG, PNG, WEBP)</div>
+                  </div>
+                  <button type="button" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; pointer-events: none;">Browse Photo</button>
+                </div>
+                <input type="text" class="form-input" id="hero_image" placeholder="images/products-lineup-wide.jpg" style="font-size: 12px; margin-top: 4px;">
+              </div>
             </div>
-            <div class="form-group">
+            <div class="form-group full-width">
               <label class="form-label">Floating Callout Title</label>
               <input type="text" class="form-input" id="hero_calloutTitle" placeholder="Service Hotline">
             </div>
@@ -847,9 +1050,23 @@
               <label class="form-label">Managing Director Name</label>
               <input type="text" class="form-input" id="about_directorName">
             </div>
-            <div class="form-group">
-              <label class="form-label">Managing Director Photo Path</label>
-              <input type="text" class="form-input" id="about_directorImage">
+            <div class="form-group full-width">
+              <label class="form-label">Managing Director Photo</label>
+              <div class="image-upload-wrapper">
+                <input type="file" id="about_directorImage_file" accept="image/*" style="display: none;" onchange="handleFileUpload(this, 'about_directorImage', 'about_directorImage_preview')">
+                <div class="image-upload-box" onclick="document.getElementById('about_directorImage_file').click()">
+                  <img id="about_directorImage_preview" src="images/director-portrait.jpg" class="image-upload-preview" alt="Preview">
+                  <div class="image-upload-meta">
+                    <div class="image-upload-title">
+                      <i data-lucide="upload-cloud" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                      <span>Upload Director Photo</span>
+                    </div>
+                    <div class="image-upload-hint">Director ki photo upload karein (JPG, PNG, WEBP)</div>
+                  </div>
+                  <button type="button" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; pointer-events: none;">Browse Photo</button>
+                </div>
+                <input type="text" class="form-input" id="about_directorImage" placeholder="images/director-portrait.jpg" style="font-size: 12px; margin-top: 4px;">
+              </div>
             </div>
           </div>
         </div>
@@ -950,9 +1167,23 @@
             <label class="form-label">Category</label>
             <input type="text" class="form-input" id="modal_prod_category" placeholder="Air Compressors">
           </div>
-          <div class="form-group">
-            <label class="form-label">Image Path / URL</label>
-            <input type="text" class="form-input" id="modal_prod_image" placeholder="images/prod-screw-compressor.jpg">
+          <div class="form-group full-width">
+            <label class="form-label">Product Image / Photo</label>
+            <div class="image-upload-wrapper">
+              <input type="file" id="modal_prod_image_file" accept="image/*" style="display: none;" onchange="handleFileUpload(this, 'modal_prod_image', 'modal_prod_image_preview')">
+              <div class="image-upload-box" onclick="document.getElementById('modal_prod_image_file').click()">
+                <img id="modal_prod_image_preview" src="images/prod-screw-compressor.jpg" class="image-upload-preview" alt="Preview">
+                <div class="image-upload-meta">
+                  <div class="image-upload-title">
+                    <i data-lucide="upload-cloud" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                    <span>Upload Product Photo</span>
+                  </div>
+                  <div class="image-upload-hint">Computer / Mobile se direct image select karein</div>
+                </div>
+                <button type="button" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; pointer-events: none;">Choose Image</button>
+              </div>
+              <input type="text" class="form-input" id="modal_prod_image" placeholder="images/prod-screw-compressor.jpg" style="font-size: 12px; margin-top: 4px;">
+            </div>
           </div>
           <div class="form-group full-width">
             <label class="form-label">Detailed Description</label>
@@ -992,8 +1223,22 @@
             <input type="text" class="form-input" id="modal_spare_badge">
           </div>
           <div class="form-group full-width">
-            <label class="form-label">Image Path / URL</label>
-            <input type="text" class="form-input" id="modal_spare_image" placeholder="images/item-air-filter.jpg">
+            <label class="form-label">Spare Part Image / Photo</label>
+            <div class="image-upload-wrapper">
+              <input type="file" id="modal_spare_image_file" accept="image/*" style="display: none;" onchange="handleFileUpload(this, 'modal_spare_image', 'modal_spare_image_preview')">
+              <div class="image-upload-box" onclick="document.getElementById('modal_spare_image_file').click()">
+                <img id="modal_spare_image_preview" src="images/item-air-filter.jpg" class="image-upload-preview" alt="Preview">
+                <div class="image-upload-meta">
+                  <div class="image-upload-title">
+                    <i data-lucide="upload-cloud" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                    <span>Upload Spare Part Photo</span>
+                  </div>
+                  <div class="image-upload-hint">Computer / Mobile se direct image select karein</div>
+                </div>
+                <button type="button" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; pointer-events: none;">Choose Image</button>
+              </div>
+              <input type="text" class="form-input" id="modal_spare_image" placeholder="images/item-air-filter.jpg" style="font-size: 12px; margin-top: 4px;">
+            </div>
           </div>
           <div class="form-group full-width">
             <label class="form-label">Description</label>
@@ -1032,9 +1277,23 @@
             <label class="form-label">Badge</label>
             <input type="text" class="form-input" id="modal_service_badge">
           </div>
-          <div class="form-group">
-            <label class="form-label">Image Path</label>
-            <input type="text" class="form-input" id="modal_service_image">
+          <div class="form-group full-width">
+            <label class="form-label">Service Photo</label>
+            <div class="image-upload-wrapper">
+              <input type="file" id="modal_service_image_file" accept="image/*" style="display: none;" onchange="handleFileUpload(this, 'modal_service_image', 'modal_service_image_preview')">
+              <div class="image-upload-box" onclick="document.getElementById('modal_service_image_file').click()">
+                <img id="modal_service_image_preview" src="images/item-screw-service.jpg" class="image-upload-preview" alt="Preview">
+                <div class="image-upload-meta">
+                  <div class="image-upload-title">
+                    <i data-lucide="upload-cloud" style="width: 16px; height: 16px; color: var(--primary);"></i>
+                    <span>Upload Service Photo</span>
+                  </div>
+                  <div class="image-upload-hint">Computer / Mobile se direct image select karein</div>
+                </div>
+                <button type="button" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; pointer-events: none;">Choose Image</button>
+              </div>
+              <input type="text" class="form-input" id="modal_service_image" placeholder="images/item-screw-service.jpg" style="font-size: 12px; margin-top: 4px;">
+            </div>
           </div>
           <div class="form-group full-width">
             <label class="form-label">Description</label>
@@ -1087,8 +1346,114 @@
       }, 3000);
     }
 
+    // Authentication Logic
+    const AUTH_SESSION_KEY = 'nec_admin_auth_token';
+
+    function checkAdminAuth() {
+      const isAuth = sessionStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
+      const overlay = document.getElementById('adminLoginOverlay');
+      if (overlay) {
+        overlay.style.display = isAuth ? 'none' : 'flex';
+      }
+      return isAuth;
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('adminUsername').value.trim();
+      const pass = document.getElementById('adminPassword').value.trim();
+      const alertBox = document.getElementById('loginAlertBox');
+      const alertMsg = document.getElementById('loginAlertMsg');
+
+      // Credentials (default: admin / admin123)
+      if (user === 'admin' && (pass === 'admin123' || pass === 'admin')) {
+        sessionStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
+        alertBox.className = 'login-alert';
+        alertBox.style.display = 'none';
+        const overlay = document.getElementById('adminLoginOverlay');
+        if (overlay) overlay.style.display = 'none';
+        showToast("Login Successful! Welcome to Admin Panel.");
+      } else {
+        alertBox.className = 'login-alert error';
+        alertBox.style.display = 'flex';
+        alertMsg.textContent = 'Galat username ya password! Kripya dobara koshish karein.';
+        lucide.createIcons();
+      }
+    }
+
+    function handleAdminLogout() {
+      if (confirm("Admin panel se logout karna chahte hain?")) {
+        sessionStorage.removeItem(AUTH_SESSION_KEY);
+        const overlay = document.getElementById('adminLoginOverlay');
+        if (overlay) {
+          overlay.style.display = 'flex';
+          document.getElementById('adminPassword').value = '';
+        }
+        showToast("Aap kamyaabi se logout ho gaye hain.", "warning");
+      }
+    }
+
+    // Direct Image Upload & Auto-Compress to Base64 Data URL
+    function handleFileUpload(inputElement, targetInputId, previewImgId) {
+      const file = inputElement.files && inputElement.files[0];
+      if (!file) return;
+
+      // Validate image format
+      if (!file.type.startsWith('image/')) {
+        alert("Kripya ek valid photo file chunein (JPG, PNG, WEBP, etc.)");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const rawDataUrl = e.target.result;
+        
+        // Compress & optimize image dimensions before saving to prevent storage bloat
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1200; // max 1200px suitable for crisp web images
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Get optimized web data URL
+          const optimizedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+
+          const targetInput = document.getElementById(targetInputId);
+          if (targetInput) {
+            targetInput.value = optimizedDataUrl;
+          }
+
+          const previewImg = document.getElementById(previewImgId);
+          if (previewImg) {
+            previewImg.src = optimizedDataUrl;
+          }
+
+          showToast("Photo kamyaabi se load ho gayi! Save button click karke confirm karein.");
+        };
+        img.src = rawDataUrl;
+      };
+      reader.readAsDataURL(file);
+    }
+
     // Initialize & populate forms
     function loadForms() {
+      checkAdminAuth();
       currentCmsData = JSON.parse(JSON.stringify(window.necCMS.data));
 
       // 1. General
@@ -1110,6 +1475,8 @@
       document.getElementById('hero_title').value = h.title || '';
       document.getElementById('hero_description').value = h.description || '';
       document.getElementById('hero_image').value = h.image || '';
+      const heroPreview = document.getElementById('hero_image_preview');
+      if (heroPreview && h.image) heroPreview.src = h.image;
       document.getElementById('hero_calloutTitle').value = h.calloutTitle || '';
 
       // 3. Products
@@ -1130,6 +1497,8 @@
       document.getElementById('about_vision').value = ab.vision || '';
       document.getElementById('about_directorName').value = ab.directorName || '';
       document.getElementById('about_directorImage').value = ab.directorImage || '';
+      const dirPreview = document.getElementById('about_directorImage_preview');
+      if (dirPreview && ab.directorImage) dirPreview.src = ab.directorImage;
 
       // 7. Theme
       const th = currentCmsData.theme || {};
@@ -1367,7 +1736,10 @@
       document.getElementById('modal_prod_name').value = prod ? prod.name : '';
       document.getElementById('modal_prod_badge').value = prod ? prod.badge : '';
       document.getElementById('modal_prod_category').value = prod ? (prod.category || '') : 'Air Compressors';
-      document.getElementById('modal_prod_image').value = prod ? prod.image : 'images/prod-screw-compressor.jpg';
+      const prodImg = prod ? prod.image : 'images/prod-screw-compressor.jpg';
+      document.getElementById('modal_prod_image').value = prodImg;
+      const prodPreview = document.getElementById('modal_prod_image_preview');
+      if (prodPreview) prodPreview.src = prodImg;
       document.getElementById('modal_prod_desc').value = prod ? prod.description : '';
       document.getElementById('modal_prod_specs').value = prod && prod.specs ? prod.specs.map(s => `${s.label}: ${s.value}`).join('\n') : '';
       document.getElementById('productModal').classList.add('active');
@@ -1427,7 +1799,10 @@
       document.getElementById('modal_spare_id').value = spare ? spare.id : ('sp-' + Date.now());
       document.getElementById('modal_spare_name').value = spare ? spare.name : '';
       document.getElementById('modal_spare_badge').value = spare ? spare.badge : '';
-      document.getElementById('modal_spare_image').value = spare ? spare.image : 'images/item-air-filter.jpg';
+      const spareImg = spare ? spare.image : 'images/item-air-filter.jpg';
+      document.getElementById('modal_spare_image').value = spareImg;
+      const sparePreview = document.getElementById('modal_spare_image_preview');
+      if (sparePreview) sparePreview.src = spareImg;
       document.getElementById('modal_spare_desc').value = spare ? spare.description : '';
       document.getElementById('modal_spare_specs').value = spare && spare.specs ? spare.specs.map(s => `${s.label}: ${s.value}`).join('\n') : '';
       document.getElementById('spareModal').classList.add('active');
@@ -1486,7 +1861,10 @@
       document.getElementById('modal_service_id').value = srv ? srv.id : ('srv-' + Date.now());
       document.getElementById('modal_service_title').value = srv ? srv.title : '';
       document.getElementById('modal_service_badge').value = srv ? srv.badge : '';
-      document.getElementById('modal_service_image').value = srv ? srv.image : 'images/item-screw-service.jpg';
+      const srvImg = srv ? srv.image : 'images/item-screw-service.jpg';
+      document.getElementById('modal_service_image').value = srvImg;
+      const srvPreview = document.getElementById('modal_service_image_preview');
+      if (srvPreview) srvPreview.src = srvImg;
       document.getElementById('modal_service_desc').value = srv ? srv.description : '';
       document.getElementById('modal_service_features').value = srv && srv.features ? srv.features.join('\n') : '';
       document.getElementById('serviceModal').classList.add('active');
