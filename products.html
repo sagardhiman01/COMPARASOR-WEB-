@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products Catalogue — National Engineering Company, Roorkee</title>
+  <meta name="description" content="Screw air compressors, reciprocating piston compressors, refrigerated air dryers, silent DG sets, servo stabilizers, and transformers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="site-data.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container-x header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="images/national-logo.svg" alt="National Engineering Company Logo" style="height: 48px; width: auto;">
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="products.html" class="nav-link active">Products</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="spares.html" class="nav-link">Spares & Parts</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="tel:+917409278477" class="header-phone-btn">
+          <i data-lucide="phone" style="width: 16px; height: 16px;"></i>
+          <span>+91 74092 78477</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+      <li><a href="products.html" class="mobile-nav-link text-primary">Products</a></li>
+      <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+      <li><a href="spares.html" class="mobile-nav-link">Spares & Parts</a></li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- Page Header Banner -->
+    <section style="background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary) 100%); color: #ffffff; padding: 7.5rem 0 3.5rem;">
+      <div class="container-x">
+        <span class="eyebrow" style="color: #bae6fd;"><span class="line" style="background: #bae6fd;"></span> Product Directory</span>
+        <h1 style="font-family: var(--font-display); font-size: 2.75rem; font-weight: 800; margin-top: 0.5rem;">
+          Industrial Equipment & Machinery
+        </h1>
+        <p style="color: rgba(255, 255, 255, 0.85); max-width: 650px; margin-top: 0.75rem; font-size: 1.1rem;">
+          Engineered for maximum reliability, lower power consumption, and long operating life across heavy industries, workshops, and facilities.
+        </p>
+      </div>
+    </section>
+
+    <!-- Product Range Breakdown -->
+    <section class="section-y" style="background-color: #ffffff;">
+      <div class="container-x">
+        <div class="products-grid" id="cms-dynamic-products-grid">
+
+          <!-- 1 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-screw-compressor.jpg" alt="Screw Air Compressor">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">7.5 HP to 75 HP</span>
+              <h3 class="product-card-title">Rotary Screw Air Compressor</h3>
+              <p class="product-card-desc">Advanced German design airend, heavy-duty oil cooler, microprocessor controller, and whisper-quiet acoustic cabinet.</p>
+              <ul class="product-specs-list">
+                <li><span>Range:</span> <strong>7.5 HP – 75 HP</strong></li>
+                <li><span>Air Delivery:</span> <strong>30 CFM – 380 CFM</strong></li>
+                <li><span>Pressure:</span> <strong>7.5 – 13 bar</strong></li>
+                <li><span>Application:</span> <strong>Continuous Industrial Use</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Screw+Compressor" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-piston-compressor.jpg" alt="Piston Air Compressor">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">5 HP to 30 HP</span>
+              <h3 class="product-card-title">Reciprocating Piston Compressor</h3>
+              <p class="product-card-desc">Robust cast iron cylinder block, precision balanced crankshaft, and oversized air receiver tank.</p>
+              <ul class="product-specs-list">
+                <li><span>Power:</span> <strong>5 HP – 30 HP</strong></li>
+                <li><span>Stages:</span> <strong>Single & Multi-Stage</strong></li>
+                <li><span>Pressure:</span> <strong>Up to 12 Bar (175 PSI)</strong></li>
+                <li><span>Application:</span> <strong>Garages, Workshops, Plants</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Piston+Compressor" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-air-dryer.jpg" alt="Refrigerated Air Dryer">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">20 CFM to 500 CFM</span>
+              <h3 class="product-card-title">Refrigerated Air Dryer (NECD Series)</h3>
+              <p class="product-card-desc">Removes humidity, water vapor, and condensation from compressed air pipelines to safeguard CNC machines and spray painting.</p>
+              <ul class="product-specs-list">
+                <li><span>Capacity:</span> <strong>20 CFM – 500 CFM</strong></li>
+                <li><span>Dew Point:</span> <strong>+3°C Atmospheric</strong></li>
+                <li><span>Condenser:</span> <strong>High Efficiency Fin Type</strong></li>
+                <li><span>Refrigerant:</span> <strong>Eco-Friendly Gas</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Air+Dryer" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-dg-set.jpg" alt="Silent DG Set">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">10 KVA to 625 KVA</span>
+              <h3 class="product-card-title">Soundproof Silent DG Set</h3>
+              <p class="product-card-desc">Fuel-efficient diesel generator sets with weather-proof, acoustic enclosure compliant with all pollution norms.</p>
+              <ul class="product-specs-list">
+                <li><span>Rating:</span> <strong>10 KVA – 625 KVA</strong></li>
+                <li><span>Fuel:</span> <strong>Diesel</strong></li>
+                <li><span>Enclosure:</span> <strong>Soundproof Acoustic</strong></li>
+                <li><span>Control:</span> <strong>Digital AMF Panel Compatible</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=DG+Set" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-servo-stabilizer.jpg" alt="Servo Voltage Stabilizer">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">10 KVA to 20,000 KVA</span>
+              <h3 class="product-card-title">Industrial Servo Stabilizer</h3>
+              <p class="product-card-desc">Microcontroller controlled automatic voltage regulator designed for unbalanced 3-phase input lines and heavy inductive loads.</p>
+              <ul class="product-specs-list">
+                <li><span>Rating:</span> <strong>10 KVA – 20,000 KVA</strong></li>
+                <li><span>Cooling:</span> <strong>Air & Oil Cooled</strong></li>
+                <li><span>Output Accuracy:</span> <strong>± 1% Voltage Regulation</strong></li>
+                <li><span>Response:</span> <strong>Instantaneous Correction</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Servo+Stabilizer" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/prod-transformer.jpg" alt="Industrial Transformer">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">25 KVA to 3150 KVA</span>
+              <h3 class="product-card-title">Power & Distribution Transformer</h3>
+              <p class="product-card-desc">High-grade copper wound transformers with low no-load losses, robust tank fabrication, and BIS star rating adherence.</p>
+              <ul class="product-specs-list">
+                <li><span>Rating:</span> <strong>25 KVA – 3150 KVA</strong></li>
+                <li><span>Voltage:</span> <strong>11 kV / 33 kV to 433 V</strong></li>
+                <li><span>Type:</span> <strong>Oil Immersed / Dry Type</strong></li>
+                <li><span>Standards:</span> <strong>IS 1180 / IS 2026</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Transformer" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/item-chemical-earthing.jpg" alt="Chemical Earthing">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">Advanced Safety</span>
+              <h3 class="product-card-title">Chemical Earthing Systems</h3>
+              <p class="product-card-desc">Maintenance-free earthing electrodes with hygroscopic moisture retaining compound for electrical installations & data centers.</p>
+              <ul class="product-specs-list">
+                <li><span>Electrode:</span> <strong>Copper Bonded High Tensile</strong></li>
+                <li><span>Compound:</span> <strong>Environment Friendly (25 kg)</strong></li>
+                <li><span>Ohm Value:</span> <strong>Stable Low Resistance (&lt;1Ω)</strong></li>
+                <li><span>Life:</span> <strong>25+ Years Maintenance Free</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Chemical+Earthing" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="product-card">
+            <div class="product-card-media">
+              <img src="images/item-plastic-pallet.jpg" alt="Plastic Pallets">
+            </div>
+            <div class="product-card-body">
+              <span class="product-badge">HDPE 1000 x 1200 mm</span>
+              <h3 class="product-card-title">Material Handling & Plastic Pallets</h3>
+              <p class="product-card-desc">High strength perforated pallets and heavy-duty hand pallet trucks (2.0 to 3.0 Ton) for warehouses, food, and pharma storage.</p>
+              <ul class="product-specs-list">
+                <li><span>Static Load:</span> <strong>5000 kg</strong></li>
+                <li><span>Dynamic Load:</span> <strong>1500 kg</strong></li>
+                <li><span>Racking:</span> <strong>1000 kg</strong></li>
+                <li><span>Handling:</span> <strong>4-Way Forklift & Pallet Truck</strong></li>
+              </ul>
+            </div>
+            <div class="product-card-action">
+              <a href="contact.html?product=Pallets" class="btn btn-primary" style="width: 100%;">Get Price Quote</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="callout-section">
+      <div class="container-x" style="max-width: 650px;">
+        <h2 style="font-size: 2.25rem; font-weight: 800; font-family: var(--font-display);">
+          Need Guidance On Machine Sizing?
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.85); margin-top: 0.75rem; font-size: 1.05rem;">
+          Speak to our technical sales team for personalized capacity calculation, air consumption audits, and competitive quotation.
+        </p>
+        <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-white">Request Quotation</a>
+          <a href="tel:+917409278477" class="btn btn-outline" style="border-color: rgba(255,255,255,0.4); color: #fff;">Call +91 74092 78477</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container-x footer-grid">
+      <div>
+        <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: #ffffff;">nat<span style="color: #38bdf8;">i</span>onal</div>
+        <div style="font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #38bdf8; margin-bottom: 1rem;">National Engineering Company</div>
+        <p style="font-size: 0.875rem; line-height: 1.6; color: rgba(255, 255, 255, 0.65);">Complete solution for all your industrial needs in Roorkee & Northern India.</p>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="spares.html">Spares</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Contact</h4>
+        <div class="footer-contact-item">
+          <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+          <span>First Floor, Near Saini Cricket Academy, Gas Godown Road, Ramnagar Industrial Area, Salempur Rajputana, Roorkee, U.K. – 247667</span>
+        </div>
+        <div class="footer-contact-item">
+          <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+          <span>Office: +91 90584 65810 | Enquiry: +91 74092 78477</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-x">
+      <div class="footer-bottom">
+        <div>© 2026 National Engineering Company. All Rights Reserved.</div>
+        <div>Roorkee, Uttarakhand</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    if (menuBtn && mobileNav) {
+      menuBtn.addEventListener('click', () => {
+        mobileNav.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>

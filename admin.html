@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard & Site Customizer — National Engineering Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="site-data.js"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --sidebar-bg: #0f172a;
+      --sidebar-card: #1e293b;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 12px;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Sidebar Layout */
+    .admin-sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid #1e293b;
+    }
+
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-header .logo-badge {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      padding: 12px 12px 6px;
+      font-weight: 700;
+    }
+
+    .nav-btn {
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 8px;
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-btn.active {
+      color: #fff;
+      background: #2563eb;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid #1e293b;
+      background: rgba(15, 23, 42, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .view-site-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .view-site-link:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Main Content Area */
+    .admin-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+
+    .admin-topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .page-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fecaca;
+    }
+    .btn-danger:hover {
+      background: #fecaca;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    /* Content body */
+    .admin-content {
+      padding: 32px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .admin-panel-section {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .admin-panel-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards & Form controls */
+    .cms-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .cms-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cms-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .form-label span.desc {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      margin-left: 4px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .form-textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    /* Items Manager List (Products / Services) */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .item-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+    }
+
+    .item-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      border-color: #cbd5e1;
+    }
+
+    .item-card-img {
+      height: 160px;
+      background: #f1f5f9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .item-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .item-badge-pill {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+
+    .item-card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .item-card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .item-card-actions {
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Notification Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      padding: 12px 20px;
+      background: #0f172a;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      animation: toastIn 0.3s ease;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 650px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      animation: modalPop 0.25s ease-out;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-radius: 0 0 16px 16px;
+    }
+
+    /* Live Preview Banner */
+    .preview-banner {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <div class="logo-badge">
+        <i data-lucide="cpu" style="width: 22px; height: 22px; color: #fff;"></i>
+      </div>
+      <div>
+        <div style="font-weight: 800; font-size: 15px; letter-spacing: -0.01em;">National Admin</div>
+        <div style="font-size: 11.5px; color: #94a3b8;">Site Customizer v2.0</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-category">Main Configuration</div>
+      <button class="nav-btn active" data-tab="general">
+        <i data-lucide="settings" style="width: 18px; height: 18px;"></i>
+        <span>General & Contacts</span>
+      </button>
+      <button class="nav-btn" data-tab="hero">
+        <i data-lucide="layout" style="width: 18px; height: 18px;"></i>
+        <span>Hero Banner & Stats</span>
+      </button>
+
+      <div class="nav-category">Catalogue Management</div>
+      <button class="nav-btn" data-tab="products">
+        <i data-lucide="package" style="width: 18px; height: 18px;"></i>
+        <span>Products Catalog</span>
+      </button>
+      <button class="nav-btn" data-tab="services">
+        <i data-lucide="wrench" style="width: 18px; height: 18px;"></i>
+        <span>Services & AMC</span>
+      </button>
+      <button class="nav-btn" data-tab="spares">
+        <i data-lucide="cog" style="width: 18px; height: 18px;"></i>
+        <span>Spares & Parts</span>
+      </button>
+
+      <div class="nav-category">Company Profile & Design</div>
+      <button class="nav-btn" data-tab="about">
+        <i data-lucide="users" style="width: 18px; height: 18px;"></i>
+        <span>About Us & Director</span>
+      </button>
+      <button class="nav-btn" data-tab="theme">
+        <i data-lucide="palette" style="width: 18px; height: 18px;"></i>
+        <span>Theme & Custom CSS</span>
+      </button>
+
+      <div class="nav-category">Deploy & Backup</div>
+      <button class="nav-btn" data-tab="backup">
+        <i data-lucide="cloud-download" style="width: 18px; height: 18px;"></i>
+        <span>Export / Push / Backup</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" class="view-site-link">
+        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+        <span>View Live Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main View Area -->
+  <main class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="page-title">
+        <h1 id="tabHeaderTitle">General & Company Info</h1>
+        <p id="tabHeaderDesc">Edit your phone numbers, address, company name, and contact handles</p>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn btn-outline" id="btnDiscardChanges">
+          <i data-lucide="rotate-ccw" style="width: 16px; height: 16px;"></i>
+          <span>Discard</span>
+        </button>
+        <button class="btn btn-primary" id="btnSaveAllChanges">
+          <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+          <span>Save Changes (Live)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+      
+      <div class="preview-banner">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i data-lucide="sparkles" style="width: 24px; height: 24px;"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 14px;">Instant Live Updates Enabled</div>
+            <div style="font-size: 12px; opacity: 0.9;">Koi bhi change save karte hi website pe bina reload kiye turant reflect ho jayega.</div>
+          </div>
+        </div>
+        <a href="index.html" target="_blank" class="btn btn-outline" style="background: rgba(255,255,255,0.2); border: none; color: #fff;">
+          Open Live Site
+        </a>
+      </div>
+
+      <!-- ================= 1. TAB: GENERAL ================= -->
+      <section id="section-general" class="admin-panel-section active">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="phone-call" style="color: var(--primary); width: 20px;"></i>
+              Phone Numbers & Communication
+            </h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Primary Mobile / MD Desk <span class="desc">(Top Header & Call button)</span></label>
+              <input type="text" class="form-input" id="gen_primaryPhone" placeholder="+91 74092 78477">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Office Hotline <span class="desc">(Footer & Contact page)</span></label>
+              <input type="text" class="form-input" id="gen_officePhone" placeholder="+91 90584 65810">
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp Contact Number <span class="desc">(Without + or spaces, e.g. 917409278477)</span></label>
+              <input type="text" class="form-input" id="gen_whatsappNumber" placeholder="917409278477">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Support Email ID</label>
+              <input type="email" class="form-input" id="gen_email" placeholder="nationalengineeringcompanyrke@gmail.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="building-2" style="color: var(--primary); width: 20px;"></i>
+              Company Details & Location
+            </h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Company Brand Name</label>
+              <input type="text" class="form-input" id="gen_siteName" placeholder="National Engineering Company">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tagline / Motto</label>
+              <input type="text" class="form-input" id="gen_tagline" placeholder="World Class Air Compressors & Industrial Equipment">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Physical Address</label>
+              <textarea class="form-textarea" id="gen_address" placeholder="Full factory / office address..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="award" style="color: var(--primary); width: 20px;"></i>
+              Trust Counters & Numbers
+            </h2>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label">Years of Experience</label>
+              <input type="text" class="form-input" id="gen_experienceYears" placeholder="15+">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Happy Clients</label>
+              <input type="text" class="form-input" id="gen_happyClients" placeholder="100+">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Installations Count</label>
+              <input type="text" class="form-input" id="gen_installations" placeholder="500+">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. TAB: HERO BANNER ================= -->
+      <section id="section-hero" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="image" style="color: var(--primary); width: 20px;"></i>
+              Homepage Hero Section
+            </h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">Hero Badge / Eyebrow Text</label>
+              <input type="text" class="form-input" id="hero_badge" placeholder="15 Years of Excellence & Commitment">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Main Heading (HTML Support)</label>
+              <input type="text" class="form-input" id="hero_title" placeholder="World Class <span class='text-primary'>Air Compressor</span> Solutions">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Sub-description Paragraph</label>
+              <textarea class="form-textarea" id="hero_description" style="min-height: 120px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hero Image Path / URL</label>
+              <input type="text" class="form-input" id="hero_image" placeholder="images/products-lineup-wide.jpg">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Floating Callout Title</label>
+              <input type="text" class="form-input" id="hero_calloutTitle" placeholder="Service Hotline">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. TAB: PRODUCTS CATALOG ================= -->
+      <section id="section-products" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <div>
+              <h2 class="cms-card-title">
+                <i data-lucide="package" style="color: var(--primary); width: 20px;"></i>
+                Manage Products Catalogue
+              </h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Add, edit specs, change photo, or remove any product from the catalog.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openProductModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+              <span>Add New Product</span>
+            </button>
+          </div>
+
+          <div class="items-grid" id="adminProductsList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 4. TAB: SERVICES ================= -->
+      <section id="section-services" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <div>
+              <h2 class="cms-card-title">
+                <i data-lucide="wrench" style="color: var(--primary); width: 20px;"></i>
+                Services & AMC Maintenance Plans
+              </h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Service offerings, overhauls, and inspection bullet points.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openServiceModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+              <span>Add New Service</span>
+            </button>
+          </div>
+
+          <div class="items-grid" id="adminServicesList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. TAB: SPARES ================= -->
+      <section id="section-spares" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <div>
+              <h2 class="cms-card-title">
+                <i data-lucide="cog" style="color: var(--primary); width: 20px;"></i>
+                Genuine Spares & Accessories
+              </h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Air filters, oil filters, separators, hydraulic pallets, and earthing spares.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openSpareModal()">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+              <span>Add Spare Part</span>
+            </button>
+          </div>
+
+          <div class="items-grid" id="adminSparesList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. TAB: ABOUT US ================= -->
+      <section id="section-about" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="users" style="color: var(--primary); width: 20px;"></i>
+              Company Story & Managing Director
+            </h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">Journey Main Heading</label>
+              <input type="text" class="form-input" id="about_journeyTitle">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Paragraph 1 (HTML Supported)</label>
+              <textarea class="form-textarea" id="about_p1" style="min-height: 90px;"></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Paragraph 2</label>
+              <textarea class="form-textarea" id="about_p2" style="min-height: 90px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Our Mission</label>
+              <textarea class="form-textarea" id="about_mission"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Our Vision</label>
+              <textarea class="form-textarea" id="about_vision"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Managing Director Name</label>
+              <input type="text" class="form-input" id="about_directorName">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Managing Director Photo Path</label>
+              <input type="text" class="form-input" id="about_directorImage">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7. TAB: THEME & STYLES ================= -->
+      <section id="section-theme" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="palette" style="color: var(--primary); width: 20px;"></i>
+              Aesthetic & Styling Customizer
+            </h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Brand Primary Color</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="color" id="theme_primaryColor_picker" style="height: 42px; width: 60px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">
+                <input type="text" class="form-input" id="theme_primaryColor" placeholder="#006bba">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Dark Navy Deep Accent</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="color" id="theme_primaryDeep_picker" style="height: 42px; width: 60px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">
+                <input type="text" class="form-input" id="theme_primaryDeep" placeholder="#00306f">
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Custom CSS Overrides <span class="desc">(Instant live styling modifications)</span></label>
+              <textarea class="form-textarea" id="theme_customCss" style="font-family: monospace; font-size: 13px; min-height: 140px;" placeholder="/* Add custom CSS rules here */"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 8. TAB: BACKUP & EXPORT ================= -->
+      <section id="section-backup" class="admin-panel-section">
+        <div class="cms-card">
+          <div class="cms-card-header">
+            <h2 class="cms-card-title">
+              <i data-lucide="download" style="color: var(--primary); width: 20px;"></i>
+              Export / Import & Reset
+            </h2>
+          </div>
+          <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+            Aap pure site ka configuration ek click me JSON file me export kar sakte hain, ya GitHub me push karne ke liye backup le sakte hain.
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+            <button class="btn btn-primary" id="btnExportJson">
+              <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+              <span>Download Site Backup (JSON)</span>
+            </button>
+            <button class="btn btn-outline" onclick="document.getElementById('importFileInput').click()">
+              <i data-lucide="upload" style="width: 16px; height: 16px;"></i>
+              <span>Import From Backup</span>
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+            <button class="btn btn-danger" id="btnResetDefaults">
+              <i data-lucide="alert-triangle" style="width: 16px; height: 16px;"></i>
+              <span>Reset to Original Defaults</span>
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Live Site Configuration JSON Data</label>
+            <textarea class="form-textarea" id="jsonViewerArea" style="font-family: monospace; font-size: 12px; min-height: 240px; background: #0f172a; color: #38bdf8;" readonly></textarea>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Product Edit / Create Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 18px; font-weight: 700;" id="prodModalTitle">Add / Edit Product</h3>
+        <button onclick="closeProductModal()" style="background: none; border: none; cursor: pointer; color: #64748b;">
+          <i data-lucide="x" style="width: 20px;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal_prod_id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-input" id="modal_prod_name" placeholder="e.g. Rotary Screw Air Compressor">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Capacity / Badge Pill</label>
+            <input type="text" class="form-input" id="modal_prod_badge" placeholder="e.g. 7.5 HP to 75 HP">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-input" id="modal_prod_category" placeholder="Air Compressors">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image Path / URL</label>
+            <input type="text" class="form-input" id="modal_prod_image" placeholder="images/prod-screw-compressor.jpg">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Detailed Description</label>
+            <textarea class="form-textarea" id="modal_prod_desc"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Specifications (Label: Value, one per line)</label>
+            <textarea class="form-textarea" id="modal_prod_specs" placeholder="Power Range: 7.5 HP – 75 HP&#10;Pressure: 7.5 to 13 Bar"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeProductModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveProductModal">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spare Edit / Create Modal -->
+  <div class="modal-overlay" id="spareModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 18px; font-weight: 700;" id="spareModalTitle">Add / Edit Spare Part</h3>
+        <button onclick="closeSpareModal()" style="background: none; border: none; cursor: pointer; color: #64748b;">
+          <i data-lucide="x" style="width: 20px;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal_spare_id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Spare Part Name</label>
+            <input type="text" class="form-input" id="modal_spare_name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Badge Pill</label>
+            <input type="text" class="form-input" id="modal_spare_badge">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Image Path / URL</label>
+            <input type="text" class="form-input" id="modal_spare_image" placeholder="images/item-air-filter.jpg">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" id="modal_spare_desc"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Specifications (Label: Value, one per line)</label>
+            <textarea class="form-textarea" id="modal_spare_specs" placeholder="Filtration: High Efficiency Nano Media&#10;Suitable For: Screw & Piston"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeSpareModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveSpareModal">Save Spare Part</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Edit / Create Modal -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 18px; font-weight: 700;" id="serviceModalTitle">Add / Edit Service</h3>
+        <button onclick="closeServiceModal()" style="background: none; border: none; cursor: pointer; color: #64748b;">
+          <i data-lucide="x" style="width: 20px;"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal_service_id">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Service Title</label>
+            <input type="text" class="form-input" id="modal_service_title">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Badge</label>
+            <input type="text" class="form-input" id="modal_service_badge">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image Path</label>
+            <input type="text" class="form-input" id="modal_service_image">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" id="modal_service_desc"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Feature Checkpoints (one per line)</label>
+            <textarea class="form-textarea" id="modal_service_features"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeServiceModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveServiceModal">Save Service</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Hub -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // Tab Headers Metadata
+    const TAB_INFO = {
+      general: { title: "General & Contacts", desc: "Manage phone numbers, company identity, address, and counter statistics." },
+      hero: { title: "Hero Banner & Header", desc: "Customize homepage main headlines, subtext, images, and highlights." },
+      products: { title: "Products Catalogue", desc: "Add, modify specifications, change pictures, or remove products." },
+      services: { title: "Services & Maintenance", desc: "Manage repair services, overhauls, and AMC inspection details." },
+      spares: { title: "Spares & Accessories", desc: "Manage genuine filters, separator elements, and pallet truck spares." },
+      about: { title: "Company Profile & Leadership", desc: "Update corporate journey, mission, vision, and Managing Director profile." },
+      theme: { title: "Theme Colors & Custom CSS", desc: "Customize brand colors, accents, and custom stylesheet overrides." },
+      backup: { title: "Export, Import & Reset", desc: "Download JSON configuration backup, restore, or reset to defaults." }
+    };
+
+    let currentCmsData = {};
+
+    function showToast(message, type = "success") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      const icon = type === 'success' ? 'check-circle' : 'alert-circle';
+      toast.innerHTML = `<i data-lucide="${icon}" style="width: 18px; color: ${type === 'success' ? '#34d399' : '#f87171'};"></i><span>${message}</span>`;
+      container.appendChild(toast);
+      lucide.createIcons();
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Initialize & populate forms
+    function loadForms() {
+      currentCmsData = JSON.parse(JSON.stringify(window.necCMS.data));
+
+      // 1. General
+      const g = currentCmsData.general || {};
+      document.getElementById('gen_primaryPhone').value = g.primaryPhone || '';
+      document.getElementById('gen_officePhone').value = g.officePhone || '';
+      document.getElementById('gen_whatsappNumber').value = g.whatsappNumber || '';
+      document.getElementById('gen_email').value = g.email || '';
+      document.getElementById('gen_siteName').value = g.siteName || '';
+      document.getElementById('gen_tagline').value = g.tagline || '';
+      document.getElementById('gen_address').value = g.address || '';
+      document.getElementById('gen_experienceYears').value = g.experienceYears || '';
+      document.getElementById('gen_happyClients').value = g.happyClients || '';
+      document.getElementById('gen_installations').value = g.installations || '';
+
+      // 2. Hero
+      const h = currentCmsData.hero || {};
+      document.getElementById('hero_badge').value = h.badge || '';
+      document.getElementById('hero_title').value = h.title || '';
+      document.getElementById('hero_description').value = h.description || '';
+      document.getElementById('hero_image').value = h.image || '';
+      document.getElementById('hero_calloutTitle').value = h.calloutTitle || '';
+
+      // 3. Products
+      renderAdminProducts();
+
+      // 4. Services
+      renderAdminServices();
+
+      // 5. Spares
+      renderAdminSpares();
+
+      // 6. About
+      const ab = currentCmsData.about || {};
+      document.getElementById('about_journeyTitle').value = ab.journeyTitle || '';
+      document.getElementById('about_p1').value = ab.p1 || '';
+      document.getElementById('about_p2').value = ab.p2 || '';
+      document.getElementById('about_mission').value = ab.mission || '';
+      document.getElementById('about_vision').value = ab.vision || '';
+      document.getElementById('about_directorName').value = ab.directorName || '';
+      document.getElementById('about_directorImage').value = ab.directorImage || '';
+
+      // 7. Theme
+      const th = currentCmsData.theme || {};
+      document.getElementById('theme_primaryColor').value = th.primaryColor || '#006bba';
+      document.getElementById('theme_primaryColor_picker').value = th.primaryColor || '#006bba';
+      document.getElementById('theme_primaryDeep').value = th.primaryDeep || '#00306f';
+      document.getElementById('theme_primaryDeep_picker').value = th.primaryDeep || '#00306f';
+      document.getElementById('theme_customCss').value = th.customCss || '';
+
+      // 8. JSON Viewer
+      document.getElementById('jsonViewerArea').value = JSON.stringify(currentCmsData, null, 2);
+
+      lucide.createIcons();
+    }
+
+    // Render Product Cards
+    function renderAdminProducts() {
+      const container = document.getElementById('adminProductsList');
+      if (!currentCmsData.products) return;
+      container.innerHTML = currentCmsData.products.map(p => `
+        <div class="item-card">
+          <div class="item-card-img">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='images/prod-screw-compressor.jpg'">
+            <span class="item-badge-pill">${p.badge}</span>
+          </div>
+          <div class="item-card-body">
+            <h4 class="item-card-name">${p.name}</h4>
+            <div style="font-size: 11.5px; color: var(--primary); font-weight: 700;">${p.category || 'General'}</div>
+            <p class="item-card-desc">${p.description}</p>
+          </div>
+          <div class="item-card-actions">
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="editProduct('${p.id}')">
+              <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+              Edit
+            </button>
+            <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;" onclick="deleteProduct('${p.id}')">
+              <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Render Services Cards
+    function renderAdminServices() {
+      const container = document.getElementById('adminServicesList');
+      if (!currentCmsData.services) return;
+      container.innerHTML = currentCmsData.services.map(s => `
+        <div class="item-card">
+          <div class="item-card-img">
+            <img src="${s.image}" alt="${s.title}" onerror="this.src='images/item-screw-service.jpg'">
+            <span class="item-badge-pill">${s.badge}</span>
+          </div>
+          <div class="item-card-body">
+            <h4 class="item-card-name">${s.title}</h4>
+            <p class="item-card-desc">${s.description}</p>
+          </div>
+          <div class="item-card-actions">
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="editService('${s.id}')">
+              <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+              Edit
+            </button>
+            <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;" onclick="deleteService('${s.id}')">
+              <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Render Spares Cards
+    function renderAdminSpares() {
+      const container = document.getElementById('adminSparesList');
+      if (!currentCmsData.spares) return;
+      container.innerHTML = currentCmsData.spares.map(sp => `
+        <div class="item-card">
+          <div class="item-card-img">
+            <img src="${sp.image}" alt="${sp.name}" onerror="this.src='images/item-air-filter.jpg'">
+            <span class="item-badge-pill">${sp.badge}</span>
+          </div>
+          <div class="item-card-body">
+            <h4 class="item-card-name">${sp.name}</h4>
+            <p class="item-card-desc">${sp.description}</p>
+          </div>
+          <div class="item-card-actions">
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="editSpare('${sp.id}')">
+              <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+              Edit
+            </button>
+            <button class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;" onclick="deleteSpare('${sp.id}')">
+              <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Save All Data Handler
+    function saveAll() {
+      // 1. General
+      currentCmsData.general = {
+        ...currentCmsData.general,
+        primaryPhone: document.getElementById('gen_primaryPhone').value,
+        officePhone: document.getElementById('gen_officePhone').value,
+        whatsappNumber: document.getElementById('gen_whatsappNumber').value,
+        email: document.getElementById('gen_email').value,
+        siteName: document.getElementById('gen_siteName').value,
+        tagline: document.getElementById('gen_tagline').value,
+        address: document.getElementById('gen_address').value,
+        experienceYears: document.getElementById('gen_experienceYears').value,
+        happyClients: document.getElementById('gen_happyClients').value,
+        installations: document.getElementById('gen_installations').value
+      };
+
+      // 2. Hero
+      currentCmsData.hero = {
+        ...currentCmsData.hero,
+        badge: document.getElementById('hero_badge').value,
+        title: document.getElementById('hero_title').value,
+        description: document.getElementById('hero_description').value,
+        image: document.getElementById('hero_image').value,
+        calloutTitle: document.getElementById('hero_calloutTitle').value
+      };
+
+      // 3. About
+      currentCmsData.about = {
+        ...currentCmsData.about,
+        journeyTitle: document.getElementById('about_journeyTitle').value,
+        p1: document.getElementById('about_p1').value,
+        p2: document.getElementById('about_p2').value,
+        mission: document.getElementById('about_mission').value,
+        vision: document.getElementById('about_vision').value,
+        directorName: document.getElementById('about_directorName').value,
+        directorImage: document.getElementById('about_directorImage').value
+      };
+
+      // 4. Theme
+      currentCmsData.theme = {
+        primaryColor: document.getElementById('theme_primaryColor').value,
+        primaryDeep: document.getElementById('theme_primaryDeep').value,
+        customCss: document.getElementById('theme_customCss').value
+      };
+
+      // Save to Site Storage
+      window.necCMS.saveData(currentCmsData);
+      document.getElementById('jsonViewerArea').value = JSON.stringify(currentCmsData, null, 2);
+      showToast("Saare changes kamyaabi se save ho gaye hain!");
+    }
+
+    // Tab Navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.admin-panel-section').forEach(s => s.classList.remove('active'));
+        const targetSection = document.getElementById(`section-${tab}`);
+        if (targetSection) targetSection.classList.add('active');
+
+        if (TAB_INFO[tab]) {
+          document.getElementById('tabHeaderTitle').textContent = TAB_INFO[tab].title;
+          document.getElementById('tabHeaderDesc').textContent = TAB_INFO[tab].desc;
+        }
+      });
+    });
+
+    // Theme Picker sync
+    document.getElementById('theme_primaryColor_picker').addEventListener('input', (e) => {
+      document.getElementById('theme_primaryColor').value = e.target.value;
+    });
+    document.getElementById('theme_primaryColor').addEventListener('input', (e) => {
+      document.getElementById('theme_primaryColor_picker').value = e.target.value;
+    });
+
+    document.getElementById('theme_primaryDeep_picker').addEventListener('input', (e) => {
+      document.getElementById('theme_primaryDeep').value = e.target.value;
+    });
+    document.getElementById('theme_primaryDeep').addEventListener('input', (e) => {
+      document.getElementById('theme_primaryDeep_picker').value = e.target.value;
+    });
+
+    // Buttons actions
+    document.getElementById('btnSaveAllChanges').addEventListener('click', saveAll);
+    document.getElementById('btnDiscardChanges').addEventListener('click', () => {
+      loadForms();
+      showToast("Changes discard kar diye gaye hain.", "warning");
+    });
+
+    document.getElementById('btnResetDefaults').addEventListener('click', () => {
+      if (confirm("Kya aap sach me default data pe reset karna chahte hain?")) {
+        window.necCMS.resetToDefault();
+        loadForms();
+        showToast("Original defaults restore ho gaye!");
+      }
+    });
+
+    document.getElementById('btnExportJson').addEventListener('click', () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentCmsData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "national_site_cms_data.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("Backup JSON file download ho gayi!");
+    });
+
+    document.getElementById('importFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const success = window.necCMS.importDataJson(event.target.result);
+        if (success) {
+          loadForms();
+          showToast("Backup data kamyaabi se import ho gaya!");
+        } else {
+          alert("Invalid JSON file!");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Product Modal Helpers
+    function openProductModal(prod = null) {
+      document.getElementById('prodModalTitle').textContent = prod ? "Edit Product" : "Add New Product";
+      document.getElementById('modal_prod_id').value = prod ? prod.id : ('prod-' + Date.now());
+      document.getElementById('modal_prod_name').value = prod ? prod.name : '';
+      document.getElementById('modal_prod_badge').value = prod ? prod.badge : '';
+      document.getElementById('modal_prod_category').value = prod ? (prod.category || '') : 'Air Compressors';
+      document.getElementById('modal_prod_image').value = prod ? prod.image : 'images/prod-screw-compressor.jpg';
+      document.getElementById('modal_prod_desc').value = prod ? prod.description : '';
+      document.getElementById('modal_prod_specs').value = prod && prod.specs ? prod.specs.map(s => `${s.label}: ${s.value}`).join('\n') : '';
+      document.getElementById('productModal').classList.add('active');
+    }
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('active');
+    }
+    function editProduct(id) {
+      const p = currentCmsData.products.find(item => item.id === id);
+      if (p) openProductModal(p);
+    }
+    function deleteProduct(id) {
+      if (confirm("Is product ko delete karna chahte hain?")) {
+        currentCmsData.products = currentCmsData.products.filter(item => item.id !== id);
+        renderAdminProducts();
+        window.necCMS.saveData(currentCmsData);
+        showToast("Product delete ho gaya!");
+      }
+    }
+    document.getElementById('btnSaveProductModal').addEventListener('click', () => {
+      const id = document.getElementById('modal_prod_id').value;
+      const name = document.getElementById('modal_prod_name').value.trim();
+      if (!name) return alert("Product name is required");
+
+      const specsText = document.getElementById('modal_prod_specs').value;
+      const specs = specsText.split('\n').filter(line => line.includes(':')).map(line => {
+        const parts = line.split(':');
+        return { label: parts[0].trim(), value: parts.slice(1).join(':').trim() };
+      });
+
+      const updatedProd = {
+        id,
+        name,
+        badge: document.getElementById('modal_prod_badge').value,
+        category: document.getElementById('modal_prod_category').value,
+        image: document.getElementById('modal_prod_image').value || 'images/prod-screw-compressor.jpg',
+        description: document.getElementById('modal_prod_desc').value,
+        specs
+      };
+
+      const existingIndex = currentCmsData.products.findIndex(p => p.id === id);
+      if (existingIndex >= 0) {
+        currentCmsData.products[existingIndex] = updatedProd;
+      } else {
+        currentCmsData.products.push(updatedProd);
+      }
+
+      closeProductModal();
+      renderAdminProducts();
+      window.necCMS.saveData(currentCmsData);
+      showToast("Product save ho gaya!");
+    });
+
+    // Spares Modal Helpers
+    function openSpareModal(spare = null) {
+      document.getElementById('spareModalTitle').textContent = spare ? "Edit Spare Part" : "Add Spare Part";
+      document.getElementById('modal_spare_id').value = spare ? spare.id : ('sp-' + Date.now());
+      document.getElementById('modal_spare_name').value = spare ? spare.name : '';
+      document.getElementById('modal_spare_badge').value = spare ? spare.badge : '';
+      document.getElementById('modal_spare_image').value = spare ? spare.image : 'images/item-air-filter.jpg';
+      document.getElementById('modal_spare_desc').value = spare ? spare.description : '';
+      document.getElementById('modal_spare_specs').value = spare && spare.specs ? spare.specs.map(s => `${s.label}: ${s.value}`).join('\n') : '';
+      document.getElementById('spareModal').classList.add('active');
+    }
+    function closeSpareModal() {
+      document.getElementById('spareModal').classList.remove('active');
+    }
+    function editSpare(id) {
+      const sp = currentCmsData.spares.find(item => item.id === id);
+      if (sp) openSpareModal(sp);
+    }
+    function deleteSpare(id) {
+      if (confirm("Is spare part ko delete karna chahte hain?")) {
+        currentCmsData.spares = currentCmsData.spares.filter(item => item.id !== id);
+        renderAdminSpares();
+        window.necCMS.saveData(currentCmsData);
+        showToast("Spare part delete ho gaya!");
+      }
+    }
+    document.getElementById('btnSaveSpareModal').addEventListener('click', () => {
+      const id = document.getElementById('modal_spare_id').value;
+      const name = document.getElementById('modal_spare_name').value.trim();
+      if (!name) return alert("Spare part name is required");
+
+      const specsText = document.getElementById('modal_spare_specs').value;
+      const specs = specsText.split('\n').filter(line => line.includes(':')).map(line => {
+        const parts = line.split(':');
+        return { label: parts[0].trim(), value: parts.slice(1).join(':').trim() };
+      });
+
+      const updatedSpare = {
+        id,
+        name,
+        badge: document.getElementById('modal_spare_badge').value,
+        image: document.getElementById('modal_spare_image').value || 'images/item-air-filter.jpg',
+        description: document.getElementById('modal_spare_desc').value,
+        specs
+      };
+
+      const existingIndex = currentCmsData.spares.findIndex(sp => sp.id === id);
+      if (existingIndex >= 0) {
+        currentCmsData.spares[existingIndex] = updatedSpare;
+      } else {
+        currentCmsData.spares.push(updatedSpare);
+      }
+
+      closeSpareModal();
+      renderAdminSpares();
+      window.necCMS.saveData(currentCmsData);
+      showToast("Spare part save ho gaya!");
+    });
+
+    // Service Modal Helpers
+    function openServiceModal(srv = null) {
+      document.getElementById('serviceModalTitle').textContent = srv ? "Edit Service" : "Add Service";
+      document.getElementById('modal_service_id').value = srv ? srv.id : ('srv-' + Date.now());
+      document.getElementById('modal_service_title').value = srv ? srv.title : '';
+      document.getElementById('modal_service_badge').value = srv ? srv.badge : '';
+      document.getElementById('modal_service_image').value = srv ? srv.image : 'images/item-screw-service.jpg';
+      document.getElementById('modal_service_desc').value = srv ? srv.description : '';
+      document.getElementById('modal_service_features').value = srv && srv.features ? srv.features.join('\n') : '';
+      document.getElementById('serviceModal').classList.add('active');
+    }
+    function closeServiceModal() {
+      document.getElementById('serviceModal').classList.remove('active');
+    }
+    function editService(id) {
+      const s = currentCmsData.services.find(item => item.id === id);
+      if (s) openServiceModal(s);
+    }
+    function deleteService(id) {
+      if (confirm("Is service ko delete karna chahte hain?")) {
+        currentCmsData.services = currentCmsData.services.filter(item => item.id !== id);
+        renderAdminServices();
+        window.necCMS.saveData(currentCmsData);
+        showToast("Service delete ho gaya!");
+      }
+    }
+    document.getElementById('btnSaveServiceModal').addEventListener('click', () => {
+      const id = document.getElementById('modal_service_id').value;
+      const title = document.getElementById('modal_service_title').value.trim();
+      if (!title) return alert("Service title is required");
+
+      const features = document.getElementById('modal_service_features').value.split('\n').filter(f => f.trim().length > 0);
+
+      const updatedSrv = {
+        id,
+        title,
+        badge: document.getElementById('modal_service_badge').value,
+        image: document.getElementById('modal_service_image').value || 'images/item-screw-service.jpg',
+        description: document.getElementById('modal_service_desc').value,
+        features
+      };
+
+      const existingIndex = currentCmsData.services.findIndex(s => s.id === id);
+      if (existingIndex >= 0) {
+        currentCmsData.services[existingIndex] = updatedSrv;
+      } else {
+        currentCmsData.services.push(updatedSrv);
+      }
+
+      closeServiceModal();
+      renderAdminServices();
+      window.necCMS.saveData(currentCmsData);
+      showToast("Service save ho gaya!");
+    });
+
+    // Start
+    window.addEventListener('DOMContentLoaded', () => {
+      loadForms();
+    });
+  </script>
+</body>
+</html>
