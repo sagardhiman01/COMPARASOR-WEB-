@@ -116,8 +116,8 @@
         </div>
 
         <!-- Hero Media Showcase -->
-        <div class="hero-media-wrapper">
-          <div class="hero-card-img">
+        <div class="hero-media-wrapper reveal-fade">
+          <div class="hero-card-img shine-effect">
             <img src="images/products-lineup-wide.jpg" alt="National Engineering Company Industrial Product Lineup">
           </div>
           <div class="floating-badge badge-left">
@@ -134,7 +134,7 @@
     </section>
 
     <!-- Blue Trust & Stats Banner -->
-    <section class="blue-banner-section">
+    <section class="blue-banner-section reveal-fade">
       <div class="container-x">
         <span class="eyebrow-light">Powering Performance • Delivering Reliability</span>
         <h2 style="font-size: 2.25rem; font-weight: 800; margin-top: 0.75rem; font-family: var(--font-display);">
@@ -371,8 +371,129 @@
       </div>
     </section>
 
+    <!-- Interactive Services Slider / Carousel Section -->
+    <section class="services-slider-section reveal-fade" id="servicesSliderSection">
+      <div class="container-x">
+        <div class="slider-controls-wrap">
+          <div>
+            <span class="eyebrow"><span class="line"></span> 24/7 Service Solutions</span>
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--ink); margin-top: 0.5rem; font-family: var(--font-display);">
+              Comprehensive Maintenance & Repair Services
+            </h2>
+            <p style="color: var(--muted-foreground); margin-top: 0.5rem; font-size: 1rem; max-width: 600px;">
+              From complete screw compressor overhauls to transformer testing and genuine part replacements across North India.
+            </p>
+          </div>
+          <div class="slider-nav-arrows">
+            <button class="slider-arrow-btn" id="srvPrevBtn" aria-label="Previous Slide">
+              <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+            </button>
+            <button class="slider-arrow-btn" id="srvNextBtn" aria-label="Next Slide">
+              <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+            </button>
+            <a href="services.html" class="btn btn-outline" style="margin-left: 0.5rem;">
+              <span>All Services</span>
+              <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Slider Viewport -->
+        <div class="services-carousel-viewport" id="srvViewport">
+          <div class="services-carousel-track" id="srvTrack">
+            <!-- 1. Screw Compressor Servicing -->
+            <div class="service-slide-card">
+              <div class="service-slide-media">
+                <span class="service-slide-badge">Screw Compressor Care</span>
+                <img src="images/item-screw-service.jpg" alt="Screw Compressor Servicing" onerror="this.src='images/service-card-compact.jpg'">
+              </div>
+              <div class="service-slide-content">
+                <h3 class="service-slide-title">Comprehensive Screw Compressor Servicing</h3>
+                <p class="service-slide-desc">Precision maintenance intervals to prevent airend degradation, oil overheating, and unnecessary plant shutdown.</p>
+                <ul class="service-slide-features">
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Complete Airend vibration & bearing check</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>OEM Air & Oil filter replacement</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Synthetic compressor oil flush & refill</span></li>
+                </ul>
+                <a href="contact.html?service=Screw+Compressor+Service" class="btn btn-primary" style="width: 100%; font-size: 0.8125rem; padding: 0.625rem 1rem;">
+                  <span>Book Technician</span>
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- 2. Piston Overhaul -->
+            <div class="service-slide-card">
+              <div class="service-slide-media">
+                <span class="service-slide-badge">Piston & Reciprocating</span>
+                <img src="images/compressor-service-piston.jpg" alt="Piston Compressor Overhauling">
+              </div>
+              <div class="service-slide-content">
+                <h3 class="service-slide-title">Piston Compressor Overhauling & Rebuild</h3>
+                <p class="service-slide-desc">Complete mechanical rebuilding restoring cylinder bore clearances, piston rings, valves, and crankshaft bearings.</p>
+                <ul class="service-slide-features">
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Head & Valve plate de-carbonizing</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>High-tensile piston ring replacements</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Hydraulic pressure vessel safety validation</span></li>
+                </ul>
+                <a href="contact.html?service=Piston+Compressor+Service" class="btn btn-primary" style="width: 100%; font-size: 0.8125rem; padding: 0.625rem 1rem;">
+                  <span>Book Technician</span>
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- 3. Electrical & Power Systems -->
+            <div class="service-slide-card">
+              <div class="service-slide-media">
+                <span class="service-slide-badge">Electrical Maintenance</span>
+                <img src="images/services-electrical-equipment.jpg" alt="Electrical Equipment Service">
+              </div>
+              <div class="service-slide-content">
+                <h3 class="service-slide-title">DG Sets, Stabilizers & Transformers AMC</h3>
+                <p class="service-slide-desc">Diagnostic maintenance and regular preventive visits preventing sudden power loss and factory interruptions.</p>
+                <ul class="service-slide-features">
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>DG Set 'B' & 'C' checks & AMF testing</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Servo stabilizer carbon brush & motor service</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Transformer BDV oil test & chemical earthing</span></li>
+                </ul>
+                <a href="contact.html?service=Electrical+Equipment+Service" class="btn btn-primary" style="width: 100%; font-size: 0.8125rem; padding: 0.625rem 1rem;">
+                  <span>Book Technician</span>
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- 4. Air Dryer & Moisture Purification -->
+            <div class="service-slide-card">
+              <div class="service-slide-media">
+                <span class="service-slide-badge">Air Treatment</span>
+                <img src="images/prod-air-dryer.jpg" alt="Air Dryer Maintenance">
+              </div>
+              <div class="service-slide-content">
+                <h3 class="service-slide-title">Air Dryer Servicing & Dew Point Tuning</h3>
+                <p class="service-slide-desc">Refrigerant gas top-up, auto-drain cleaning, and heat exchanger servicing to keep compressed air 100% moisture free.</p>
+                <ul class="service-slide-features">
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Eco refrigerant R134a leakage & pressure check</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Auto timer drain valve descaling</span></li>
+                  <li><i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> <span>Dew point PDP optimization to +3°C</span></li>
+                </ul>
+                <a href="contact.html?service=Air+Dryer+Service" class="btn btn-primary" style="width: 100%; font-size: 0.8125rem; padding: 0.625rem 1rem;">
+                  <span>Book Technician</span>
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Pagination Dots -->
+        <div class="slider-dots-wrap" id="srvDots"></div>
+      </div>
+    </section>
+
     <!-- Compressor Service Highlights -->
-    <section class="section-y" style="background-color: #ffffff;">
+    <section class="section-y reveal-fade" style="background-color: #ffffff;">
       <div class="container-x">
         <div style="display: grid; grid-template-columns: 1fr; lg-grid-template-columns: 12fr; gap: 3rem; align-items: center;" class="hero-grid">
           <div>
@@ -425,7 +546,7 @@
           </div>
 
           <div>
-            <div class="hero-card-img compact-media">
+            <div class="hero-card-img compact-media shine-effect">
               <img src="images/service-card-compact.jpg" alt="Screw Compressor Service by National Engineering Company">
             </div>
           </div>
@@ -723,6 +844,174 @@
         header.classList.remove('scrolled');
       }
     });
+
+    // -------------------------------------------------------------
+    // Scroll Reveal Observer (Smooth Fade In on Scroll)
+    // -------------------------------------------------------------
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal-fade').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Also apply reveal-fade to product and feature cards dynamically
+    document.querySelectorAll('.product-card, .feature-card, .stat-card').forEach((el, index) => {
+      el.classList.add('reveal-fade');
+      el.style.transitionDelay = `${(index % 4) * 0.1}s`;
+      revealObserver.observe(el);
+    });
+
+    // -------------------------------------------------------------
+    // Interactive Services Carousel / Slider Controller
+    // -------------------------------------------------------------
+    (function initServicesSlider() {
+      const track = document.getElementById('srvTrack');
+      const prevBtn = document.getElementById('srvPrevBtn');
+      const nextBtn = document.getElementById('srvNextBtn');
+      const dotsWrap = document.getElementById('srvDots');
+      const viewport = document.getElementById('srvViewport');
+      if (!track || !prevBtn || !nextBtn) return;
+
+      let currentIndex = 0;
+      let autoplayTimer = null;
+
+      function getVisibleCardsCount() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+      }
+
+      function getMaxIndex() {
+        const totalCards = track.querySelectorAll('.service-slide-card').length;
+        const visible = getVisibleCardsCount();
+        return Math.max(0, totalCards - visible);
+      }
+
+      function updateSlider() {
+        const maxIdx = getMaxIndex();
+        if (currentIndex > maxIdx) currentIndex = maxIdx;
+        if (currentIndex < 0) currentIndex = 0;
+
+        const cards = track.querySelectorAll('.service-slide-card');
+        if (cards.length === 0) return;
+
+        const cardWidth = cards[0].offsetWidth;
+        const gap = 24; // 1.5rem
+        const shiftX = currentIndex * (cardWidth + gap);
+
+        track.style.transform = `translateX(-${shiftX}px)`;
+
+        // Update Prev / Next Buttons state
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === maxIdx;
+
+        // Update Dots
+        renderDots();
+      }
+
+      function renderDots() {
+        const maxIdx = getMaxIndex();
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i <= maxIdx; i++) {
+          const dot = document.createElement('button');
+          dot.className = `slider-dot ${i === currentIndex ? 'active' : ''}`;
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateSlider();
+            resetAutoplay();
+          });
+          dotsWrap.appendChild(dot);
+        }
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const maxIdx = getMaxIndex();
+        if (currentIndex < maxIdx) {
+          currentIndex++;
+        } else {
+          currentIndex = 0; // loop back
+        }
+        updateSlider();
+        resetAutoplay();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        const maxIdx = getMaxIndex();
+        if (currentIndex > 0) {
+          currentIndex--;
+        } else {
+          currentIndex = maxIdx;
+        }
+        updateSlider();
+        resetAutoplay();
+      });
+
+      // Touch / Swipe Navigation
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      viewport.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = startX - currentX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            // swipe left -> next
+            const maxIdx = getMaxIndex();
+            currentIndex = currentIndex < maxIdx ? currentIndex + 1 : 0;
+          } else {
+            // swipe right -> prev
+            const maxIdx = getMaxIndex();
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIdx;
+          }
+          updateSlider();
+          resetAutoplay();
+        }
+      });
+
+      // Smooth Auto-Play (every 4.5 seconds)
+      function startAutoplay() {
+        autoplayTimer = setInterval(() => {
+          const maxIdx = getMaxIndex();
+          currentIndex = currentIndex < maxIdx ? currentIndex + 1 : 0;
+          updateSlider();
+        }, 4500);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayTimer);
+        startAutoplay();
+      }
+
+      viewport.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+      viewport.addEventListener('mouseleave', () => startAutoplay());
+
+      window.addEventListener('resize', () => {
+        updateSlider();
+      });
+
+      // Initial Call
+      updateSlider();
+      startAutoplay();
+    })();
   </script>
 </body>
 </html>
